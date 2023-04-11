@@ -2,6 +2,7 @@ import React from 'react';
 import '../style.css';
 import { Typography, Card, CardContent, Grid, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 const header = (
   <CardContent sx={{ color: 'white', backgroundColor: 'primary.dark' }}>
@@ -9,10 +10,13 @@ const header = (
       <Grid item xs></Grid>
       <Grid item xs={6} className="centered">
         <MenuIcon />
-        <Typography>FRAMEWORKS</Typography>
+        <Typography>&nbsp;FRAMEWORKS</Typography>
       </Grid>
       <Grid item xs className="align-right">
-        <Button variant="contained">ADD</Button>
+        <Button variant="contained">
+          <AddCircleIcon />
+          &nbsp;ADD
+        </Button>
       </Grid>
     </Grid>
   </CardContent>
