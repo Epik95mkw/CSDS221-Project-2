@@ -4,14 +4,8 @@ p {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.centered {
+.title {
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-.align-right {
-  display: flex;
-  justify-content: right;
   align-items: center;
 }

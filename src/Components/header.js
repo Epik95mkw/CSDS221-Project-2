@@ -34,11 +34,11 @@ export default function Header() {
       <CardContent sx={{ color: 'white', backgroundColor: 'primary.dark' }}>
         <Grid container>
           <Grid item xs></Grid>
-          <Grid item xs={6} className="centered">
+          <Grid item xs={6} className="title">
             <MenuIcon />
             <Typography>&nbsp;FRAMEWORKS</Typography>
           </Grid>
-          <Grid item xs className="align-right">
+          <Grid item xs align="right">
             <Button variant="contained">
               <AddCircleIcon />
               &nbsp;ADD
