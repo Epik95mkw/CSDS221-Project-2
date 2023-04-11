@@ -1,11 +1,11 @@
 import React from 'react';
 import './style.css';
-import Table from './Components/table.js';
+import Header from './Components/header.js';
 
 export default function App() {
   return (
     <div>
-      <Table />
+      <Header />
     </div>
   );
 }

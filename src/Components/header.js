@@ -22,7 +22,7 @@ const header = (
   </CardContent>
 );
 
-export default function Table() {
+export default function Header() {
   return (
     <Card>
       {header}
