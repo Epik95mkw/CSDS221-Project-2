@@ -1,7 +1,7 @@
 import React from 'react';
 import '../style.css';
 import { Typography, Card, CardContent, Grid, Button } from '@mui/material';
-import { MenuIcon } from '@mui/icons-material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const header = (
   <CardContent sx={{ color: 'white', backgroundColor: 'primary.dark' }}>
