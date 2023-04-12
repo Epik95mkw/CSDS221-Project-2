@@ -5,6 +5,17 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 export default function Header(props) {
+  const addButton = (
+    <Button
+      variant="contained"
+      startIcon={}
+      onClick={props.openPopup}
+    >
+      <AddCircleIcon fontSize="small" />
+      <Typography>add</Typography>
+    </Button>
+  );
+
   return (
     <CardContent sx={{ color: 'white', backgroundColor: 'primary.dark' }}>
       <Grid container>
@@ -14,10 +25,7 @@ export default function Header(props) {
           <Typography variant="h6">&nbsp;FRAMEWORKS</Typography>
         </Grid>
         <Grid item xs align="right">
-          <Button variant="contained" onClick={props.onAddClick}>
-            <AddCircleIcon />
-            &nbsp;ADD
-          </Button>
+        {addButton}
         </Grid>
       </Grid>
     </CardContent>
