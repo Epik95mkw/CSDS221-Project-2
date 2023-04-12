@@ -12,6 +12,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import IconButton from './button.js';
 import DatePicker from './datepicker.js';
+import PopupRadioGroup from './radiogroup.js';
 
 function popupIcon(size, isEdit) {
   if (isEdit) return <EditNoteIcon fontSize={size} />;
@@ -55,6 +56,7 @@ export default function Popup(props) {
             helperText="Description is required"
           />
           <DatePicker label="Deadline" />
+          <PopupRadioGroup options={['Low', 'Med', 'High']} />
         </Box>
       </CardContent>
     </Card>
