@@ -1,20 +1,12 @@
 import React from 'react';
 import '../style.css';
-import { Typography, CardContent, Grid, Button } from '@mui/material';
+import { Typography, CardContent, Grid } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import IconButton from './button.js';
 
 export default function Header(props) {
-  const addButton = (
-    <Button
-      variant="contained"
-      startIcon={}
-      onClick={props.openPopup}
-    >
-      <AddCircleIcon fontSize="small" />
-      <Typography>add</Typography>
-    </Button>
-  );
+  const onAddClick = props.onAddClick;
 
   return (
     <CardContent sx={{ color: 'white', backgroundColor: 'primary.dark' }}>
@@ -25,7 +17,7 @@ export default function Header(props) {
           <Typography variant="h6">&nbsp;FRAMEWORKS</Typography>
         </Grid>
         <Grid item xs align="right">
-        {addButton}
+          <IconButton icon={AddCircleIcon} text="add" />
         </Grid>
       </Grid>
     </CardContent>
