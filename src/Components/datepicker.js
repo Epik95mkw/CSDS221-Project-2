@@ -1,4 +1,5 @@
 import React from 'react';
+import '../style.css';
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -9,8 +10,10 @@ export default function DatePicker(props) {
   const defaultValue = dayjs(props.default);
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker label={label} defaultValue={defaultValue} />
-    </LocalizationProvider>
+    <div>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <DatePicker label={label} defaultValue={defaultValue} />
+      </LocalizationProvider>
+    </div>
   );
 }
