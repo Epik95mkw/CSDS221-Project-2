@@ -11,6 +11,8 @@ export default function App() {
   const openPopup = () => setOpen(true);
   const closePopup = () => setOpen(false);
 
+  return <Popup />;
+
   return (
     <Card>
       <Header onAddClick={openPopup} />
