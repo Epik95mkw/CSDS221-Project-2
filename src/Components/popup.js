@@ -10,6 +10,8 @@ import {
 } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import EditNoteIcon from '@mui/icons-material/EditNote';
+import IconButton from './button.js';
+import DatePicker from './datepicker.js';
 
 function popupIcon(size, isEdit) {
   if (isEdit) return <EditNoteIcon fontSize={size} />;
@@ -18,13 +20,7 @@ function popupIcon(size, isEdit) {
 
 export default function Popup(props) {
   const isEdit = props.mode == 'edit';
-
   const modeText = isEdit ? 'Edit' : 'Add';
-  const modeIcon = isEdit ? (
-    <EditNoteIcon fontSize="medium" />
-  ) : (
-    <AddCircleIcon fontSize="medium" />
-  );
 
   return (
     <Card className="popup">
@@ -40,39 +36,25 @@ export default function Popup(props) {
         <Box
           component="form"
           direction="column"
-          sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
+          sx={{ '& > :not(style)': { m: 1, mb: 2, width: '25ch' } }}
         >
           {isEdit ? (
             <></>
           ) : (
-            <div className="form-spacing">
-              <TextField
-                id="title"
-                label="Title"
-                variant="outlined"
-                margin="small"
-                helperText="Title is required"
-              />
-            </div>
+            <TextField
+              id="title"
+              label="Title"
+              variant="outlined"
+              helperText="Title is required"
+            />
           )}
-          <div>
-            <TextField
-              id="description"
-              label="Description"
-              variant="outlined"
-              margin="small"
-              helperText="Description is required"
-            />
-          </div>
-          <div>
-            <TextField
-              id="deadline"
-              label="Deadline"
-              variant="outlined"
-              margin="small"
-              helperText=""
-            />
-          </div>
+          <TextField
+            id="description"
+            label="Description"
+            variant="outlined"
+            helperText="Description is required"
+          />
+          <DatePicker label="Deadline" />
         </Box>
       </CardContent>
     </Card>
