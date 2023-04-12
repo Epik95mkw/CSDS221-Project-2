@@ -10,7 +10,7 @@ export default function IconButton(props) {
   return (
     <Button variant="contained" onClick={onClick}>
       {icon}
-      <Typography>&nbsp;{text}</Typography>
+      <Typography lineHeight={0}>&nbsp;{text}</Typography>
     </Button>
   );
 }

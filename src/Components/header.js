@@ -17,7 +17,7 @@ export default function Header(props) {
           <Typography variant="h6">&nbsp;FRAMEWORKS</Typography>
         </Grid>
         <Grid item xs align="right">
-          <IconButton icon={AddCircleIcon} text="add" />
+          <IconButton icon={AddCircleIcon} text="add" onClick={onAddClick} />
         </Grid>
       </Grid>
     </CardContent>
