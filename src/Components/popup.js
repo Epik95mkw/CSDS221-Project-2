@@ -70,8 +70,9 @@ export default function Popup(props) {
     let index = newData.indexOf(target);
     rowData[0] = newData[index].data[0];
     newData[index].data = rowData;
-    setData(newData);
+    newData[index].popup = false;
     closePopup();
+    setData(newData);
   };
 
   const isEdit = props.mode == 'edit';
