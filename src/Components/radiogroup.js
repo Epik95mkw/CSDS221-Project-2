@@ -9,13 +9,10 @@ import {
 } from '@mui/material';
 
 export default function PopupRadioGroup(props) {
+  const label = props.label;
   const options = props.options;
-  const initial = props.initial;
-
-  const [selectedValue, setSelectedValue] = React.useState(initial);
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
+  const value = props.value;
+  const onChange = props.onChange;
 
   const buttons = options.map((opt) => (
     <FormControlLabel
@@ -27,8 +24,8 @@ export default function PopupRadioGroup(props) {
 
   return (
     <FormControl>
-      <FormLabel id="radios">Priority</FormLabel>
-      <RadioGroup row value={selectedValue} onChange={handleChange}>
+      <FormLabel id={label}>{label}</FormLabel>
+      <RadioGroup row value={value} onChange={onChange}>
         {buttons}
       </RadioGroup>
     </FormControl>

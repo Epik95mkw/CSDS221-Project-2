@@ -31,29 +31,28 @@ export default function Table(props) {
   const data = props.data;
   const setData = props.setData;
 
-  function Entry(rowData) {
-    const [open, setOpen] = React.useState(false);
-    const openPopup = () => setOpen(true);
-    const closePopup = () => setOpen(false);
+  const [open, setOpen] = React.useState(false);
+  const openPopup = () => setOpen(true);
+  const closePopup = () => setOpen(false);
 
-    const [checked, setChecked] = React.useState(false);
-    const handleChange = (event) => {
-      setChecked(event.target.checked);
+  function Entry(row) {
+    const deleteEntry = () => setData(data.filter((r, i) => r != row));
+    const handleCheckbox = (event) => {
+      row.checked = event.target.checked;
+      setData(structuredClone(data));
     };
-
-    const deleteEntry = () => setData(data.filter((r, i) => r != rowData));
 
     return (
       <TableRow>
-        {rowData.map((c, i) => (
+        {row.data.map((c, i) => (
           <TableCell align="center">{c}</TableCell>
         ))}
         <TableCell align="center">
-          <Checkbox checked={checked} onChange={handleChange} />
+          <Checkbox checked={row.checked} onChange={handleCheckbox} />
         </TableCell>
         <TableCell align="center">
           <div>
-            {checked ? null : (
+            {row.checked ? null : (
               <IconButton
                 icon={EditNoteIcon}
                 text="update"

@@ -1,5 +1,6 @@
 import React from 'react';
 import '../style.css';
+import dayjs from 'dayjs';
 import {
   Card,
   CardContent,
@@ -21,24 +22,53 @@ function popupIcon(size, isEdit) {
   else return <AddCircleIcon fontSize={size} />;
 }
 
-function textInput(label) {
+function textInput(label, value, onChange) {
   return (
     <div>
       <TextField
         id={label}
         label={label}
+        value={value}
         variant="outlined"
         fullWidth
         helperText={label + ' is required'}
+        onChange={onChange}
       />
     </div>
   );
 }
 
+function validate() {}
+
+const initialState = {
+  title: '',
+  desc: '',
+  deadline: dayjs(),
+  priority: 'Low',
+  isComplete: false,
+};
+
 export default function Popup(props) {
+  const [formState, setFormState] = React.useState(initialState);
+  const handleTitleChange = (ev) =>
+    setFormState({ ...formState, title: ev.target.value });
+  const handleDescChange = (ev) =>
+    setFormState({ ...formState, desc: ev.target.value });
+  const handleDeadlineChange = (ev) =>
+    setFormState({ ...formState, deadline: ev.target.value });
+  const handlePriorityChange = (ev) =>
+    setFormState({ ...formState, priority: ev.target.value });
+
+  const data = props.data;
+  const setData = props.setData;
+  const insertEntry = (rowData) => setData(data.concat([rowData]));
+
   const isEdit = props.mode == 'edit';
   const isOpen = props.isOpen;
-  const closePopup = props.onClose;
+  const closePopup = () => {
+    setFormState(initialState);
+    props.onClose();
+  };
 
   const modeText = isEdit ? 'Edit' : 'Add';
 
@@ -62,10 +92,24 @@ export default function Popup(props) {
               direction="column"
               sx={{ '& > :not(style)': { mx: 1, mb: 2, width: '30ch' } }}
             >
-              {isEdit ? null : textInput('Title')}
-              {textInput('Description')}
-              <DatePicker label="Deadline" />
-              <PopupRadioGroup options={['Low', 'Med', 'High']} initial="Low" />
+              {isEdit
+                ? null
+                : textInput('Title', formState.title, handleTitleChange)}
+
+              {textInput('Description', formState.desc, handleDescChange)}
+
+              <DatePicker
+                label="Deadline"
+                value={formState.deadline}
+                onChange={handleDeadlineChange}
+              />
+
+              <PopupRadioGroup
+                label="Priority"
+                options={['Low', 'Med', 'High']}
+                value={formState.priority}
+                onChange={handlePriorityChange}
+              />
             </Box>
           </CardContent>
           <Box align="right" sx={{ m: 0.3 }}>

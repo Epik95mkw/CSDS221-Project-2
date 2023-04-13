@@ -7,12 +7,19 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 export default function DatePicker(props) {
   const label = props.label;
+  const value = props.value;
+  const onChange = props.onChange;
   const defaultValue = dayjs(props.default);
 
   return (
     <div>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker label={label} defaultValue={defaultValue} />
+        <DatePicker
+          label={label}
+          value={value}
+          defaultValue={defaultValue}
+          onChange={onChange}
+        />
       </LocalizationProvider>
     </div>
   );

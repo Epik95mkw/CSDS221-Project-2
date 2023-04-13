@@ -7,8 +7,14 @@ import Table from './Components/table.js';
 import Popup from './Components/popup.js';
 import IconButton from './Components/button.js';
 
+const initialData = [
+  { data: ['title1', 'desc1', 'dead', 'prrr'], checked: false, popup: false },
+  { data: ['title2', 'desc1', 'dead', 'prrr'], checked: false, popup: false },
+  { data: ['title3', 'desc1', 'dead', 'prrr'], checked: false, popup: false },
+];
+
 export default function App() {
-  const [data, setData] = React.useState([['title1', 'desc1', 'dead', 'prrr']]);
+  const [data, setData] = React.useState(initialData);
   const insertEntry = (rowData) => setData(data.concat([rowData]));
   const deleteEntry = (rowData) => setData(data.filter((r, i) => r != rowData));
 
@@ -31,7 +37,13 @@ export default function App() {
         </Grid>
       </CardContent>
 
-      <Popup mode="add" isOpen={open} onClose={closePopup} setData={setData} />
+      <Popup
+        mode="add"
+        isOpen={open}
+        onClose={closePopup}
+        data={data}
+        setData={setData}
+      />
 
       <CardContent>
         <Table data={data} setData={setData} />
