@@ -31,12 +31,16 @@ export default function Table(props) {
   const data = props.data;
   const setData = props.setData;
 
-  const [open, setOpen] = React.useState(false);
-  const openPopup = () => setOpen(true);
-  const closePopup = () => setOpen(false);
-
   function Entry(row) {
     const deleteEntry = () => setData(data.filter((r, i) => r != row));
+    const openPopup = () => {
+      row.popup = true;
+      setData(structuredClone(data));
+    };
+    const closePopup = () => {
+      row.popup = false;
+      setData(structuredClone(data));
+    };
     const handleCheckbox = (event) => {
       row.checked = event.target.checked;
       setData(structuredClone(data));
@@ -61,7 +65,7 @@ export default function Table(props) {
             )}
             <Popup
               mode="edit"
-              isOpen={open}
+              isOpen={row.popup}
               onClose={closePopup}
               setData={setData}
             />
