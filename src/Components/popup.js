@@ -25,7 +25,7 @@ function popupIcon(size, isEdit) {
   else return <AddCircleIcon fontSize={size} />;
 }
 
-function textInput(label, value, onChange) {
+function textInput(label, value, helper, onChange) {
   return (
     <div>
       <TextField
@@ -33,8 +33,9 @@ function textInput(label, value, onChange) {
         label={label}
         value={value}
         variant="outlined"
+        error={!!helper}
         fullWidth
-        helperText={label + ' is required'}
+        helperText={helper}
         onChange={onChange}
       />
     </div>
@@ -46,6 +47,8 @@ const initialState = {
   desc: '',
   deadline: dayjs(),
   priority: 'Low',
+  titleMsg: '',
+  descMsg: '',
 };
 
 export default function Popup(props) {
@@ -89,15 +92,38 @@ export default function Popup(props) {
   };
 
   function validate() {
-    let newRow = [
-      formState.title,
-      formState.desc,
-      formState.deadline.format('MM/DD/YY'),
-      formState.priority,
-    ];
+    let valid = true;
+    let titleMsg = '';
+    let descMsg = '';
 
-    if (isEdit) editEntry(newRow);
-    else insertEntry(newRow);
+    if (isEdit) {
+      // continue
+    } else if (!formState.title) {
+      titleMsg = 'Title is required';
+      valid = false;
+    } else if (data.some((r) => r.data[0] == formState.title)) {
+      titleMsg = 'Title already exists';
+      valid = false;
+    }
+
+    if (!formState.desc) {
+      descMsg = 'Description is required';
+      valid = false;
+    }
+
+    setFormState({ ...formState, titleMsg: titleMsg, descMsg: descMsg });
+
+    if (valid) {
+      let newRow = [
+        formState.title,
+        formState.desc,
+        formState.deadline.format('MM/DD/YY'),
+        formState.priority,
+      ];
+
+      if (isEdit) editEntry(newRow);
+      else insertEntry(newRow);
+    }
   }
 
   return (
@@ -122,9 +148,19 @@ export default function Popup(props) {
             >
               {isEdit
                 ? null
-                : textInput('Title', formState.title, handleTitleChange)}
+                : textInput(
+                    'Title',
+                    formState.title,
+                    formState.titleMsg,
+                    handleTitleChange
+                  )}
 
-              {textInput('Description', formState.desc, handleDescChange)}
+              {textInput(
+                'Description',
+                formState.desc,
+                formState.descMsg,
+                handleDescChange
+              )}
 
               <DatePicker
                 label="Deadline"
