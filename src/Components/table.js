@@ -19,13 +19,9 @@ const columns = [
   'Description',
   'Deadline',
   'Priority',
-  'IsComplete',
+  'Is Complete',
   'Action',
 ];
-
-const columnHeaders = columns.map((c, i) => (
-  <TableCell align="center">{c}</TableCell>
-));
 
 export default function Table(props) {
   const data = props.data;
@@ -67,6 +63,7 @@ export default function Table(props) {
               mode="edit"
               isOpen={row.popup}
               onClose={closePopup}
+              data={data}
               setData={setData}
             />
           </div>
@@ -91,7 +88,11 @@ export default function Table(props) {
           ))}
         </colgroup>
         <TableHead>
-          <TableRow>{columnHeaders}</TableRow>
+          <TableRow>
+            {columns.map((c, i) => (
+              <TableCell align="center">{c}</TableCell>
+            ))}
+          </TableRow>
         </TableHead>
         <TableBody>{data.map((row, i) => Entry(row))}</TableBody>
       </Table>

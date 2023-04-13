@@ -38,14 +38,11 @@ function textInput(label, value, onChange) {
   );
 }
 
-function validate() {}
-
 const initialState = {
   title: '',
   desc: '',
   deadline: dayjs(),
   priority: 'Low',
-  isComplete: false,
 };
 
 export default function Popup(props) {
@@ -54,23 +51,43 @@ export default function Popup(props) {
     setFormState({ ...formState, title: ev.target.value });
   const handleDescChange = (ev) =>
     setFormState({ ...formState, desc: ev.target.value });
-  const handleDeadlineChange = (ev) =>
-    setFormState({ ...formState, deadline: ev.target.value });
+  const handleDeadlineChange = (newValue) =>
+    setFormState({ ...formState, deadline: newValue });
   const handlePriorityChange = (ev) =>
     setFormState({ ...formState, priority: ev.target.value });
 
   const data = props.data;
   const setData = props.setData;
-  const insertEntry = (rowData) => setData(data.concat([rowData]));
+  const insertEntry = (rowData) => {
+    let newData = structuredClone(data);
+    newData.push({ data: rowData, checked: false, popup: false });
+    setData(newData);
+    closePopup();
+  };
+  const editEntry = (rowData) => {
+    let newData = structuredClone(data);
+    let target = newData.find((r) => r.popup);
+    let index = newData.indexOf(target);
+    rowData[0] = newData[index].data[0];
+    newData[index].data = rowData;
+    setData(newData);
+    closePopup();
+  };
 
   const isEdit = props.mode == 'edit';
+  const modeText = isEdit ? 'Edit' : 'Add';
   const isOpen = props.isOpen;
   const closePopup = () => {
     setFormState(initialState);
     props.onClose();
   };
 
-  const modeText = isEdit ? 'Edit' : 'Add';
+  function validate() {
+    let newRow = [formState.title, formState.desc, 'test', formState.priority];
+
+    if (isEdit) editEntry(newRow);
+    else insertEntry(newRow);
+  }
 
   return (
     <Modal open={isOpen} onClose={closePopup}>
@@ -116,6 +133,7 @@ export default function Popup(props) {
             <IconButton
               icon={isEdit ? EditNoteIcon : AddCircleIcon}
               text={modeText}
+              onClick={validate}
             />
             <IconButton
               icon={DoNotDisturbAltIcon}
