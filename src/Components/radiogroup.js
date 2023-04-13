@@ -14,7 +14,7 @@ export default function PopupRadioGroup(props) {
   const value = props.value;
   const onChange = props.onChange;
 
-  const buttons = options.map((opt) => (
+  const buttons = options.map((opt, i) => (
     <FormControlLabel
       value={opt}
       label={opt}

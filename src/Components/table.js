@@ -14,6 +14,9 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import IconButton from './button.js';
 import Popup from './popup.js';
 
+import toastr from 'toastr';
+toastr.options = { positionClass: 'toast-bottom-right' };
+
 const columns = [
   'Title',
   'Description',
@@ -28,7 +31,10 @@ export default function Table(props) {
   const setData = props.setData;
 
   function Entry(row) {
-    const deleteEntry = () => setData(data.filter((r, i) => r != row));
+    const deleteEntry = () => {
+      setData(data.filter((r, i) => r != row));
+      toastr['success']('Task deleted successfully');
+    };
     const openPopup = () => {
       row.popup = true;
       setData(structuredClone(data));
@@ -84,7 +90,7 @@ export default function Table(props) {
       <Table>
         <colgroup>
           {columns.map((c, i) => (
-            <col width="16%" />
+            <col key={c} width="16%" />
           ))}
         </colgroup>
         <TableHead>

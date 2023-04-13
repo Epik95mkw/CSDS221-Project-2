@@ -17,6 +17,9 @@ import IconButton from './button.js';
 import DatePicker from './datepicker.js';
 import PopupRadioGroup from './radiogroup.js';
 
+import toastr from 'toastr';
+toastr.options = { positionClass: 'toast-bottom-right' };
+
 function popupIcon(size, isEdit) {
   if (isEdit) return <EditNoteIcon fontSize={size} />;
   else return <AddCircleIcon fontSize={size} />;
@@ -63,6 +66,7 @@ export default function Popup(props) {
     newData.push({ data: rowData, checked: false, popup: false });
     setData(newData);
     closePopup();
+    toastr['success']('Task added successfully');
   };
   const editEntry = (rowData) => {
     let newData = structuredClone(data);
@@ -73,6 +77,7 @@ export default function Popup(props) {
     newData[index].popup = false;
     closePopup();
     setData(newData);
+    toastr['success']('Task updated successfully');
   };
 
   const isEdit = props.mode == 'edit';
@@ -84,7 +89,12 @@ export default function Popup(props) {
   };
 
   function validate() {
-    let newRow = [formState.title, formState.desc, 'test', formState.priority];
+    let newRow = [
+      formState.title,
+      formState.desc,
+      formState.deadline.format('MM/DD/YY'),
+      formState.priority,
+    ];
 
     if (isEdit) editEntry(newRow);
     else insertEntry(newRow);
