@@ -8,7 +8,9 @@ import Popup from './Components/popup.js';
 import IconButton from './Components/button.js';
 
 export default function App() {
-  const [data, setData] = React.useState([]);
+  const [data, setData] = React.useState([['title1', 'desc1', 'dead', 'prrr']]);
+  const insertEntry = (rowData) => setData(data.concat([rowData]));
+  const deleteEntry = (rowData) => setData(data.filter((r, i) => r != rowData));
 
   const [open, setOpen] = React.useState(false);
   const openPopup = () => setOpen(true);
