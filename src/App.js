@@ -1,9 +1,11 @@
 import React from 'react';
 import './style.css';
-import { Card, CardContent, Modal, Typography } from '@mui/material';
-import Header from './Components/header.js';
+import { Card, CardContent, Grid, Typography } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Table from './Components/table.js';
 import Popup from './Components/popup.js';
+import IconButton from './Components/button.js';
 
 export default function App() {
   const [data, setData] = React.useState([]);
@@ -14,8 +16,21 @@ export default function App() {
 
   return (
     <Card>
-      <Header onAddClick={openPopup} />
+      <CardContent sx={{ color: 'white', backgroundColor: 'primary.dark' }}>
+        <Grid container>
+          <Grid item xs></Grid>
+          <Grid item xs={6} className="title">
+            <MenuIcon />
+            <Typography variant="h6">&nbsp;FRAMEWORKS</Typography>
+          </Grid>
+          <Grid item xs align="right">
+            <IconButton icon={AddCircleIcon} text="add" onClick={openPopup} />
+          </Grid>
+        </Grid>
+      </CardContent>
+
       <Popup mode="add" isOpen={open} onClose={closePopup} setData={setData} />
+
       <CardContent>
         <Table data={data} setData={setData} />
       </CardContent>
