@@ -6,6 +6,8 @@ import Table from './Components/table.js';
 import Popup from './Components/popup.js';
 
 export default function App() {
+  const [data, setData] = React.useState([]);
+
   const [open, setOpen] = React.useState(false);
   const openPopup = () => setOpen(true);
   const closePopup = () => setOpen(false);
@@ -13,11 +15,9 @@ export default function App() {
   return (
     <Card>
       <Header onAddClick={openPopup} />
-      <Modal open={open} onClose={closePopup}>
-        <Popup mode="add" />
-      </Modal>
+      <Popup mode="add" isOpen={open} onClose={closePopup} setData={setData} />
       <CardContent>
-        <Table />
+        <Table data={data} setData={setData} />
       </CardContent>
     </Card>
   );
