@@ -7,16 +7,10 @@ import Table from './Components/table.js';
 import Popup from './Components/popup.js';
 import IconButton from './Components/button.js';
 
-const initialData = [
-  { data: ['title1', 'desc1', 'dead', 'prrr'], checked: false, popup: false },
-  { data: ['title2', 'desc1', 'dead', 'prrr'], checked: false, popup: false },
-  { data: ['title3', 'desc1', 'dead', 'prrr'], checked: false, popup: false },
-];
+const initialData = [];
 
 export default function App() {
   const [data, setData] = React.useState(initialData);
-  const insertEntry = (rowData) => setData(data.concat([rowData]));
-  const deleteEntry = (rowData) => setData(data.filter((r, i) => r != rowData));
 
   const [open, setOpen] = React.useState(false);
   const openPopup = () => setOpen(true);
