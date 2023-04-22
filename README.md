@@ -1,4 +1,4 @@
-# CSDS290-Project-2
+# CSDS221-Project-2
 
 Simple to-do app using React/MUI
 
